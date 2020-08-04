@@ -1,15 +1,15 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_mail import Mail
 import json
 
 local_server = True
-
 with open('config.json', 'r') as c:
     params = json.load(c)['params']
 
 app = Flask(__name__)
+app.secret_key='super-secret-key'
 app.config.update(
     MAIL_SERVER = "smtp.gmail.com",
     MAIL_PORT = "465",
@@ -42,6 +42,28 @@ class posts(db.Model):
 def index():
     Posts= posts.query.filter_by().all()
     return render_template("index.html", params=params, Posts=Posts)
+
+@app.route('/login', methods=['POST','GET'])
+def login():
+    if 'user' in session and session['user'] == params['admin-username']:
+        return redirect("/admin")
+    else:
+        if request.method =="POST":
+            username = request.form.get('username')
+            password = request.form.get('password')
+            if username == params['admin-username'] and password == params['admin-password']:
+                session['user'] = username
+                return redirect("/admin")
+
+    return render_template("login.html")
+
+@app.route('/admin')
+def admin():
+    if 'user' in session and session['user'] == params['admin-username']:
+        Posts= posts.query.filter_by().all()
+        return render_template("admin.html", params=params, Posts=Posts)
+    else:
+        return render_template("login.html")
 
 @app.route('/about')
 def about():
