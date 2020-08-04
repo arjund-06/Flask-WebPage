@@ -1,8 +1,0 @@
-{
-    "params":{
-        "local_server":"True",
-        "local_uri":"mysql://root:@localhost/cleanblog",
-        "gmail-username":"flaskman2020@gmail.com",
-        "gmail-password":"Dummy@12345"
-    }
-}
