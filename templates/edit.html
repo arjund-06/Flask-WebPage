@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+    
+        
+{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h2>ADMIN PAGE</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <form name="sentMessage" id="contactForm" method="POST" action="/edit/{{sno}}" >
+    <div class="control-group">
+      <div class="form-group floating-label-form-group controls">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Title" id="title" name="title" required data-validation-required-message="Please enter your name.">
+        <p class="help-block text-danger"></p>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="form-group floating-label-form-group controls">
+        <label>Slug</label>
+        <input type="text" class="form-control" placeholder="Slug" id="slug" name="slug" required data-validation-required-message="Please enter your email address.">
+        <p class="help-block text-danger"></p>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="form-group col-xs-12 floating-label-form-group controls">
+        <label>Content</label>
+        <input type="text" class="form-control" placeholder="Content" id="content" name="content" required data-validation-required-message="Please enter your phone number.">
+        <p class="help-block text-danger"></p>
+      </div>
+    </div>
+    <br>
+    <div id="success"></div>
+    <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+  </form>
+
+
+{% endblock %}
+</body>
+</html>

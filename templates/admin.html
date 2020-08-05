@@ -15,8 +15,13 @@
       </div>
     </div>
   </header>
-<div class="login2">
-<table class="login3" style="border: 2px solid black;">
+  
+  <div class="container">
+  <h2>POSTS</h2>
+  <a href="/edit/0"><button class="btn btn-primary float-left">ADD A NEW POST</button></a><br>
+  <hr>
+  <div class="overlay">
+  <table class="login3" style="border: 2px solid black;">
     <thead>
       <tr>
         <th scope="col">S.No.</th>
@@ -36,13 +41,14 @@
         <td>{{post.content}}</td>
         <td>{{post.date}}</td>
         <td>
-            <a href="#">EDIT</a>
+            <a href="/edit/{{post.sno}}">EDIT</a>
             <a href="#">DELETE</a>
         </td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
+</div>
 </div>
 {% endblock %}
 </body>

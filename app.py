@@ -65,6 +65,27 @@ def admin():
     else:
         return render_template("login.html")
 
+@app.route('/edit/<string:sno>', methods=['POST','GET'])
+def edit(sno):
+    if 'user' in session and session['user'] == params['admin-username']:
+        if request.method == 'POST':
+            title = request.form.get('title')
+            post_slug = request.form.get('slug')
+            content = request.form.get('content')
+            
+            if sno == '0':
+                post = posts(title=title, post_slug=post_slug, content=content, img_file="image", date= datetime.now())
+                db.session.add(post)
+                db.session.commit()
+            else:
+                post= posts.query.filter_by(sno = sno).first()
+                post.title = title
+                post.post_slug = post_slug
+                post.content =  content
+                db.session.commit()
+            return redirect("/admin")
+        return render_template("edit.html", params=params, sno=sno)
+
 @app.route('/about')
 def about():
     return render_template("about.html")
