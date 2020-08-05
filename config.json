@@ -3,7 +3,7 @@
         "local_server":"True",
         "local_uri":"mysql://root:@localhost/cleanblog",
         "gmail-username":"flaskman2020@gmail.com",
-        "gmail-password":"Dummy@12345",
+        "gmail-password":"Dummy@1234",
         "admin-username":"AD6",
         "admin-password":"Password"
     }
