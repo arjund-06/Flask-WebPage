@@ -72,19 +72,32 @@ def edit(sno):
             title = request.form.get('title')
             post_slug = request.form.get('slug')
             content = request.form.get('content')
+            img_file = request.form.get("img_file")
             
-            if sno == '0':
-                post = posts(title=title, post_slug=post_slug, content=content, img_file="image", date= datetime.now())
-                db.session.add(post)
-                db.session.commit()
-            else:
-                post= posts.query.filter_by(sno = sno).first()
-                post.title = title
-                post.post_slug = post_slug
-                post.content =  content
-                db.session.commit()
+            post= posts.query.filter_by(sno = sno).first()
+            post.title = title
+            post.post_slug = post_slug
+            post.content =  content
+            db.session.commit()
             return redirect("/admin")
-        return render_template("edit.html", params=params, sno=sno)
+        Post = posts.query.filter_by(sno = sno).first()
+        return render_template("edit.html", params=params, Post = Post)
+
+
+@app.route('/add', methods=['POST','GET'])
+def add():
+    if 'user' in session and session['user'] == params['admin-username']:
+        if request.method == 'POST':
+            title = request.form.get('title')
+            post_slug = request.form.get('slug')
+            content = request.form.get('content')
+            img_file = request.form.get("img_file")
+
+            post= posts(title= title, post_slug= post_slug, content= content, img_file= img_file, date=datetime.now())
+            db.session.add(post)
+            db.session.commit()
+            return redirect("/admin")
+        return render_template("add.html", params=params)
 
 @app.route('/about')
 def about():

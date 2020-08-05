@@ -16,38 +16,38 @@
     </div>
   </header>
 
-<form name="sentMessage" id="contactForm" method="POST" action="/edit/{{Post.sno}}" >
+<form name="sentMessage" id="contactForm" method="POST" action="/add">
     <div class="control-group">
       <div class="form-group floating-label-form-group controls">
         <label>Title</label>
-        <input type="text" class="form-control" placeholder="Title" id="title" name="title" value="{{Post.title}}">
+        <input type="text" class="form-control" placeholder="Title" id="title" name="title">
         <p class="help-block text-danger"></p>
       </div>
     </div>
     <div class="control-group">
       <div class="form-group floating-label-form-group controls">
         <label>Slug</label>
-        <input type="text" class="form-control" placeholder="Slug" id="slug" name="slug" value="{{Post.post_slug}}">
+        <input type="text" class="form-control" placeholder="Slug" id="slug" name="slug">
         <p class="help-block text-danger"></p>
       </div>
     </div>
     <div class="control-group">
       <div class="form-group col-xs-12 floating-label-form-group controls">
         <label>Content</label>
-        <input type="text" class="form-control" placeholder="Content" id="content" name="content" value="{{Post.content}}">
+        <input type="text" class="form-control" placeholder="Content" id="content" name="content">
         <p class="help-block text-danger"></p>
       </div>
     </div>
     <div class="control-group">
         <div class="form-group col-xs-12 floating-label-form-group controls">
           <label>Content</label>
-          <input type="text" class="form-control" placeholder="Image File" id="img_file" name="img_file" value="{{Post.img_file}}">
+          <input type="text" class="form-control" placeholder="Image File" id="img_file" name="img_file">
           <p class="help-block text-danger"></p>
         </div>
       </div>
     <br>
     <div id="success"></div>
-    <button type="submit" class="btn btn-primary" id="sendMessageButton">CHANGE</button>
+    <button type="submit" class="btn btn-primary" id="sendMessageButton">POST</button>
   </form>
 
 
