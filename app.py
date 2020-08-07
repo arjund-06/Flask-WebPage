@@ -83,6 +83,12 @@ def edit(sno):
         Post = posts.query.filter_by(sno = sno).first()
         return render_template("edit.html", params=params, Post = Post)
 
+@app.route('/delete/<string:sno>', methods=['GET'])
+def delete(sno):
+    post = posts.query.filter_by(sno = sno).first()
+    db.session.delete(post)
+    db.session.commit()
+    return redirect("/admin")
 
 @app.route('/add', methods=['POST','GET'])
 def add():
