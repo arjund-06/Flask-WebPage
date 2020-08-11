@@ -3,8 +3,9 @@
         "local_server":"True",
         "local_uri":"mysql://root:@localhost/cleanblog",
         "gmail-username":"flaskman2020@gmail.com",
-        "gmail-password":"Dummy@1234",
+        "gmail-password":"Password",
         "admin-username":"AD6",
-        "admin-password":"Password"
+        "admin-password":"Password",
+        "no_of_posts":"3"
     }
 }

@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_mail import Mail
 import json
+import math
 
 local_server = True
 with open('config.json', 'r') as c:
@@ -41,7 +42,31 @@ class posts(db.Model):
 @app.route('/')
 def index():
     Posts= posts.query.filter_by().all()
-    return render_template("index.html", params=params, Posts=Posts)
+    
+
+    last = math.ceil(len(Posts)/int(params["no_of_posts"]))
+    page = request.args.get('page')
+    
+    if(not str(page).isnumeric()):
+        page=1
+    
+    page = int(page)
+    if (page==1):
+        prev="#"
+        next="/?page="+ str(page+1)
+    
+    elif(page==last):
+        prev="/?page="+ str(page-1)
+        next="#"
+
+    else:
+        prev="/?page="+ str(page-1)
+        next="/?page="+ str(page+1)
+    
+    Posts = Posts[(page-1)*int(params["no_of_posts"]):(page-1)*int(params["no_of_posts"])+int(params["no_of_posts"])]
+    return render_template("index.html", params=params, Posts=Posts, prev=prev, next=next)
+
+    
 
 @app.route('/login', methods=['POST','GET'])
 def login():
@@ -56,6 +81,12 @@ def login():
                 return redirect("/admin")
 
     return render_template("login.html")
+
+@app.route('/logout', methods=['POST','GET'])
+def logout():
+    session.pop('user')
+    return redirect("/login")
+
 
 @app.route('/admin')
 def admin():
